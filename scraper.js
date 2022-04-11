@@ -13,9 +13,37 @@ const self = {
     self.page = await self.browser.newPage();
 
     // go to the subreddit
-    await self.page.goto(SUBREDDIT_URL(scraper), { waitUnti: `networkidle0` });
+    await self.page.goto(SUBREDDIT_URL(scraper), { waitUntil: `networkidle0` });
   },
   getResults: async (nr) => {
+    let results = [];
+
+    do {
+      let new_results = await self.parseResults();
+
+      results = [...results, ...new_results];
+
+      debugger;
+      console.log(nr);
+
+      if (results.length < nr) {
+        let nextPageButton = await self.page.$(
+          'span[class="next-button"] > a[rel="nofollow next"]'
+        );
+
+        if (nextPageButton) {
+          await nextPageButton.click();
+          await self.page.waitForNavigation({ waitUntil: "networkidle0" });
+        } else {
+          break;
+        }
+      }
+    } while (results.length < nr);
+
+    return results.slice(0, nr);
+  },
+
+  parseResults: async (nr) => {
     let elements = await self.page.$$('#siteTable > div[class*="thing"]');
     let results = [];
 
@@ -41,8 +69,6 @@ const self = {
         (node) => node.innerText.trim()
       );
 
-      console.log(title, comments, rank, time, votes);
-
       results.push({
         title,
         rank,
@@ -51,6 +77,7 @@ const self = {
         comments,
       });
     }
+    console.log(results);
     return results;
   },
 };
