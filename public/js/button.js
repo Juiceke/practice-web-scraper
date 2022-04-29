@@ -14,7 +14,7 @@ async function getData() {
   if (redditNmb > 100) {
     return;
   }
-  const response = await fetch("http://localhost:3001/scrape", {
+  const response = await fetch(__dirname + "/scrape", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +33,7 @@ async function getData() {
 }
 
 async function loadData() {
-  const res = await fetch("http://localhost:3001/scrape");
+  const res = await fetch(__dirname + "/scrape");
   const redditPosts = await res.json();
 
   const cards = document.querySelectorAll(".card");
