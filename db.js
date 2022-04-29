@@ -1,6 +1,5 @@
 const typeorm = require("typeorm");
 const env = require("dotenv").config();
-
 class subReddit {
   constructor(id, title, rank, time, votes, comments) {
     this.id = id;
@@ -49,10 +48,10 @@ const RedditSchema = new EntitySchema({
 async function getConnection() {
   return await typeorm.createConnection({
     type: "mysql",
-    host: "localhost",
+    host: env.parsed.HOST,
     port: "3306",
-    username: "root",
-    password: env.parsed.SECRET_CODE,
+    username: env.parsed.USER,
+    password: env.parsed.PASSWORD,
     database: env.parsed.DATABASE,
     extra: {
       charset: "utf8mb4_unicode_ci",
@@ -67,7 +66,7 @@ async function getAllInfo() {
   const connection = await getConnection();
   const redditRepo = connection.getRepository(subReddit);
   const reddit = await redditRepo.find();
-  connection.close();
+  await connection.close();
   return reddit;
 }
 
