@@ -53,7 +53,7 @@ async function getConnection() {
     port: "3306",
     username: "root",
     password: env.parsed.SECRET_CODE,
-    database: "setuptourist",
+    database: env.parsed.DATABASE,
     extra: {
       charset: "utf8mb4_unicode_ci",
     },
