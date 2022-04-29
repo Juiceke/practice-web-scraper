@@ -7,7 +7,9 @@ const self = {
   page: null,
 
   initialize: async (scraper) => {
-    self.browser = await puppeteer.launch();
+    self.browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     self.page = await self.browser.newPage();
 
     // go to the subreddit
