@@ -2,13 +2,14 @@ const scraper = require("./scraper");
 const db = require("./db");
 const express = require("express");
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 // make index.html accessible to clients
 app.use(express.static("public"));
 app.use(express.json());
 
 // make localhost active at 3001
-app.listen(3001, () => {
+app.listen(PORT, () => {
   console.log("app is listening on port 3001");
 });
 
