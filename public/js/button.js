@@ -1,5 +1,5 @@
 const redditBtn = document.querySelector("#redditbtn");
-
+const href = window.location.href;
 // button that searches based on text box
 redditBtn.addEventListener("click", async (e) => {
   e.preventDefault();
@@ -14,7 +14,7 @@ async function getData() {
   if (redditNmb > 100) {
     return;
   }
-  const response = await fetch(__dirname + "/scrape", {
+  const response = await fetch(href + "scrape", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +33,7 @@ async function getData() {
 }
 
 async function loadData() {
-  const res = await fetch(__dirname + "/scrape");
+  const res = await fetch(href + "scrape");
   const redditPosts = await res.json();
 
   const cards = document.querySelectorAll(".card");
