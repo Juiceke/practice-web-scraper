@@ -1,5 +1,5 @@
 const typeorm = require("typeorm");
-const env = require("dotenv");
+require("dotenv").config();
 class subReddit {
   constructor(id, title, rank, time, votes, comments) {
     this.id = id;
