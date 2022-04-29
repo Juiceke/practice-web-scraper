@@ -7,9 +7,7 @@ const self = {
   page: null,
 
   initialize: async (scraper) => {
-    self.browser = await puppeteer.launch({
-      headless: false,
-    });
+    self.browser = await puppeteer.launch();
     self.page = await self.browser.newPage();
 
     // go to the subreddit
@@ -22,9 +20,6 @@ const self = {
       let new_results = await self.parseResults();
 
       results = [...results, ...new_results];
-
-      debugger;
-      console.log(nr);
 
       if (results.length < nr) {
         let nextPageButton = await self.page.$(
@@ -77,7 +72,10 @@ const self = {
         comments,
       });
     }
-    console.log(results);
+
+    // console.log(results);
+
+    console.log("session closed");
     return results;
   },
 };

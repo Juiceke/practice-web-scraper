@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reddit Scrape</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <form>
+      <label for="subReddit">Enter a subReddit name. (without the r/):</label>
+      <input name="subReddit" type="text" id="reddittxt" />
+      <label for="postCount"
+        >Enter the amount of posts you'd like to scrape from their homepage. (no
+        greater than 100):</label
+      >
+      <input type="number" id="redditnmb" min="1" max="100" />
+      <button type="button" id="redditbtn">scrape</button>
+    </form>
+    <section class="subReddits"></section>
+  </body>
+  <script src="/js/button.js"></script>
+</html>

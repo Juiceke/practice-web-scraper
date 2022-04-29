@@ -1,0 +1,22 @@
+body {
+  background-color: beige;
+}
+
+.subReddits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  flex: 0 1 calc(25% - 1em);
+  background-color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  /* border-radius: 10%; */
+  border: 2px solid black;
+}
+
+.title {
+  border-bottom: 1px solid black;
+}
