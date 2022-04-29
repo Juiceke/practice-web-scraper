@@ -1,5 +1,6 @@
 const typeorm = require("typeorm");
-const env = require("dotenv").config();
+const env = require("dotenv").config().parsed;
+console.log(env);
 
 class subReddit {
   constructor(id, title, rank, time, votes, comments) {
@@ -48,12 +49,12 @@ const RedditSchema = new EntitySchema({
 
 async function getConnection() {
   return await typeorm.createConnection({
-    type: "mysql",
-    host: "localhost",
-    port: "3306",
-    username: "root",
-    password: env.parsed.SECRET_CODE,
-    database: "setuptourist",
+    type: "postgres",
+    host: env.HOST,
+    port: "5432",
+    username: env.USER,
+    password: env.SECRET_CODE,
+    database: env.DATABASE,
     extra: {
       charset: "utf8mb4_unicode_ci",
     },
